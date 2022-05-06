@@ -35,10 +35,11 @@ const Login = () => {
             <FormWrapper>
                 <HeaderText>{visitedBefore ? 'Welcome back 👋' : 'Log in'}</HeaderText>
                 <Form onSubmit={handleSubmit(onSubmit)}>
-                    <Input {...register('email')} type="email" placeholder="Email" />
+                    <Input {...register('email')} type="email" placeholder="Email" autoFocus />
                     <Input {...register('password')} type="password" placeholder="Password" />
                     <Button type="submit">Log in</Button>
                 </Form>
+                <p>or</p>
                 <Button google onClick={() => handleLoginWithGoogle()}>
                     <img src={GoogleIcon} alt="" /> Log in with Google
                 </Button>

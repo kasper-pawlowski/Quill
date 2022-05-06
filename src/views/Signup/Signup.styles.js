@@ -17,14 +17,8 @@ export const LogoLink = styled(LogoImg)`
     left: 20px;
 `;
 
-export const Form = styled.form`
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-`;
-
 export const FormWrapper = styled.div`
+    height: 100%;
     width: 50%;
     display: flex;
     flex-direction: column;
@@ -45,6 +39,13 @@ export const FormWrapper = styled.div`
         width: 100%;
         padding: 0 5%;
     }
+`;
+
+export const Form = styled.form`
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
 `;
 
 export const HeaderText = styled.p`
@@ -112,5 +113,6 @@ export const ImgWrapper = styled.div`
 `;
 
 export const Image = styled(Img)`
-    width: 70%;
+    width: 50%;
+    height: 100%;
 `;

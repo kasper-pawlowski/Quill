@@ -10,6 +10,8 @@ const Signup = () => {
     const { register, handleSubmit } = useForm();
     let navigate = useNavigate();
 
+    const steps = [1, 2, 3];
+
     const handleLoginWithGoogle = async () => {
         await loginWithGoogle().then(() => {
             navigate('/');
@@ -30,11 +32,12 @@ const Signup = () => {
             <FormWrapper>
                 <HeaderText>Sign up</HeaderText>
                 <Form onSubmit={handleSubmit(onSubmit)}>
-                    <Input {...register('displayName')} type="text" placeholder="Display name" />
+                    <Input {...register('displayName')} type="text" placeholder="Display name" autoFocus />
                     <Input {...register('email')} type="email" placeholder="Email" />
                     <Input {...register('password')} type="password" placeholder="Password" />
                     <Button type="submit">Create account</Button>
                 </Form>
+                <p>or</p>
                 <Button google onClick={() => handleLoginWithGoogle()}>
                     <img src={GoogleIcon} alt="" /> Sign up with Google
                 </Button>

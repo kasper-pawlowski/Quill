@@ -112,5 +112,6 @@ export const ImgWrapper = styled.div`
 `;
 
 export const Image = styled(Img)`
-    width: 70%;
+    width: 60%;
+    height: 100%;
 `;
