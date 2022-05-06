@@ -2,13 +2,13 @@ import styled from 'styled-components';
 import { ReactComponent as LogoImg } from 'assets/images/logo-white.svg';
 import { ArrowUpOutline } from '@styled-icons/evaicons-outline/ArrowUpOutline';
 import { Logout } from '@styled-icons/heroicons-solid/Logout';
+import { User } from '@styled-icons/boxicons-regular/User';
 
 export const Wrapper = styled.div`
     height: 100%;
     width: 20%;
     background-color: #000;
     color: #fff;
-    /* padding: 20px; */
     display: flex;
     flex-direction: column;
 `;
@@ -37,12 +37,17 @@ export const ProfileWrapper = styled.div`
     }
 `;
 
+export const DefaultAvatar = styled(User)`
+    width: 25px;
+`;
+
 export const ArrowIcon = styled(ArrowUpOutline)`
     width: 30px;
     transform: ${({ isOpen }) => isOpen && 'rotate(-180deg)'};
     transition-duration: 0.15s;
     margin-left: auto;
     cursor: pointer;
+    z-index: 23;
 `;
 
 export const ProfileMenu = styled.div`

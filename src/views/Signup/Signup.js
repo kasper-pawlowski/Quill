@@ -16,8 +16,8 @@ const Signup = () => {
         });
     };
 
-    const onSubmit = async (data) => {
-        await createUser(data.email, data.password).then(() => {
+    const onSubmit = async ({ email, password, displayName }) => {
+        await createUser(email, password, displayName).then(() => {
             navigate('/');
         });
     };

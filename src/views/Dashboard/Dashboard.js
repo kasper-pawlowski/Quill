@@ -12,8 +12,6 @@ const Dashboard = () => {
         return <Navigate to="/welcome" replace />;
     }
 
-    console.log(currentUser);
-
     return (
         <Wrapper>
             <Sidebar />

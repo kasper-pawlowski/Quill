@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Wrapper, ProfileWrapper, LogoLink, ArrowIcon, ProfileMenu, ProfileMenuItem, LogoutIcon } from './Sidebar.styles.js';
+import { Wrapper, ProfileWrapper, LogoLink, ArrowIcon, ProfileMenu, ProfileMenuItem, LogoutIcon, DefaultAvatar } from './Sidebar.styles.js';
 import { useAuth } from 'context/AuthContext';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -15,13 +15,15 @@ const Sidebar = () => {
                 <LogoLink />
             </Link>
             <AnimatePresence>
-                <ProfileWrapper as={motion.div} layout transition={{ duration: 0.15 }}>
-                    <img src={currentUser.photoURL} alt="" />
+                <ProfileWrapper key="profile-wrapper" as={motion.div} layout transition={{ duration: 0.15 }}>
+                    {currentUser.photoURL ? <img src={currentUser.photoURL} alt="" /> : <DefaultAvatar />}
                     <p>{currentUser.displayName}</p>
                     <ArrowIcon isOpen={isOpen} onClick={() => setIsOpen(!isOpen)} />
                 </ProfileWrapper>
+
                 {isOpen && (
                     <ProfileMenu
+                        key="profile-menu"
                         as={motion.div}
                         layout
                         initial={{ opacity: 0 }}

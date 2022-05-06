@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { Wrapper, FormWrapper, Form, ImgWrapper, Input, HeaderText, Button, SignupLink, SignupText, Image, LogoLink } from './Login.styles.js';
 import GoogleIcon from 'assets/images/Google-Icon.png';
@@ -9,6 +9,7 @@ const Login = () => {
     const { loginWithGoogle, login } = useAuth();
     const { register, handleSubmit } = useForm();
     let navigate = useNavigate();
+    const [visitedBefore] = useState(window.localStorage.getItem('visited'));
 
     const handleLoginWithGoogle = async () => {
         await loginWithGoogle().then(() => {
@@ -16,8 +17,12 @@ const Login = () => {
         });
     };
 
-    const onSubmit = async (data) => {
-        await login(data.email, data.password).then(() => {
+    useEffect(() => {
+        window.localStorage.setItem('visited', '1');
+    }, [visitedBefore]);
+
+    const onSubmit = async ({ email, password }) => {
+        await login(email, password).then(() => {
             navigate('/');
         });
     };
@@ -28,7 +33,7 @@ const Login = () => {
                 <LogoLink />
             </Link>
             <FormWrapper>
-                <HeaderText>Welcome back</HeaderText>
+                <HeaderText>{visitedBefore ? 'Welcome back 👋' : 'Log in'}</HeaderText>
                 <Form onSubmit={handleSubmit(onSubmit)}>
                     <Input {...register('email')} type="email" placeholder="Email" />
                     <Input {...register('password')} type="password" placeholder="Password" />
