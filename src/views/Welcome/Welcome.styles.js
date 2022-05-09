@@ -57,7 +57,7 @@ export const Hero = styled.div`
 
     p {
         margin-top: 10px;
-        color: #4f4f4f;
+        color: ${({ theme }) => theme.colors.grey1};
         font-size: 16px;
         font-weight: 500;
     }
@@ -106,9 +106,9 @@ export const LinksWrapper = styled.div`
 `;
 
 export const GetStaredLink = styled(Link)`
-    background-color: #000;
+    background-color: ${({ theme }) => theme.colors.black};
     display: block;
-    color: #fff;
+    color: ${({ theme }) => theme.colors.white};
     font-weight: 500;
     border-radius: 10px;
     padding: 12px 0;
@@ -127,7 +127,7 @@ export const GetStaredLink = styled(Link)`
         height: 100%;
         position: absolute;
         background: none;
-        border: 3px solid #000;
+        border: 3px solid ${({ theme }) => theme.colors.black};
         border-radius: 10px;
         bottom: -10px;
         right: -10px;
@@ -155,7 +155,7 @@ export const ImageWrapper = styled.div`
 
     img {
         width: 100%;
-        border: 3px solid #000;
+        border: 3px solid ${({ theme }) => theme.colors.black};
         border-radius: 50px;
         border-top-left-radius: 50px;
         border-top-right-radius: 50px;

@@ -7,8 +7,6 @@ import { ReactComponent as Img } from 'assets/images/pixeltrue-plan.svg';
 export const Wrapper = styled(Div100vh)`
     width: 100%;
     display: flex;
-    @media (max-width: 750px) {
-    }
 `;
 
 export const LogoLink = styled(LogoImg)`
@@ -46,6 +44,11 @@ export const Form = styled.form`
     display: flex;
     flex-direction: column;
     gap: 15px;
+
+    p {
+        margin-bottom: 10px;
+        align-self: end;
+    }
 `;
 
 export const HeaderText = styled.p`
@@ -57,7 +60,7 @@ export const HeaderText = styled.p`
 
 export const Input = styled.input`
     background: none;
-    border: 3px solid #000;
+    border: 3px solid ${({ theme }) => theme.colors.black};
     border-radius: 10px;
     padding: 15px 20px;
     font-size: 18px;
@@ -68,7 +71,7 @@ export const Input = styled.input`
 export const Button = styled.button`
     background-color: ${({ google }) => (google ? '#fff' : '#000')};
     color: ${({ google }) => (google ? '#000' : '#fff')};
-    border: 3px solid #000;
+    border: 3px solid ${({ theme }) => theme.colors.black};
     display: flex;
     align-items: center;
     justify-content: center;
@@ -88,11 +91,11 @@ export const Button = styled.button`
 `;
 
 export const LoginText = styled.p`
-    color: #9e9e9e;
+    color: ${({ theme }) => theme.colors.grey2};
 `;
 
 export const LoginLink = styled(Link)`
-    color: #000;
+    color: ${({ theme }) => theme.colors.black};
     font-weight: 600;
 `;
 
@@ -101,7 +104,7 @@ export const ImgWrapper = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #e8e8e8;
+    background-color: ${({ theme }) => theme.colors.grey3};
 
     @media (max-width: 1100px) {
         display: none;

@@ -6,25 +6,27 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from 'context/AuthContext';
 
 const Login = () => {
-    const { loginWithGoogle, login } = useAuth();
+    const { loginWithGoogle, login, currentUser } = useAuth();
     const { register, handleSubmit } = useForm();
     let navigate = useNavigate();
     const [visitedBefore] = useState(window.localStorage.getItem('visited'));
-
-    const handleLoginWithGoogle = async () => {
-        await loginWithGoogle().then(() => {
-            navigate('/');
-        });
-    };
 
     useEffect(() => {
         window.localStorage.setItem('visited', '1');
     }, [visitedBefore]);
 
-    const onSubmit = async ({ email, password }) => {
-        await login(email, password).then(() => {
+    const handleLoginWithGoogle = () => {
+        loginWithGoogle().then(() => {
             navigate('/');
         });
+    };
+
+    const onSubmit = ({ email, password }) => {
+        login(email, password)
+            .then(() => {
+                currentUser && navigate('/');
+            })
+            .catch((err) => console.log(err.message));
     };
 
     return (

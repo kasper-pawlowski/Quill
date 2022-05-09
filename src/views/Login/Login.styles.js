@@ -56,7 +56,7 @@ export const HeaderText = styled.p`
 
 export const Input = styled.input`
     background: none;
-    border: 3px solid #000;
+    border: 3px solid ${({ theme }) => theme.colors.black};
     border-radius: 10px;
     padding: 15px 20px;
     font-size: 18px;
@@ -87,11 +87,11 @@ export const Button = styled.button`
 `;
 
 export const SignupText = styled.p`
-    color: #9e9e9e;
+    color: ${({ theme }) => theme.colors.grey2};
 `;
 
 export const SignupLink = styled(Link)`
-    color: #000;
+    color: ${({ theme }) => theme.colors.black};
     font-weight: 600;
 `;
 
@@ -100,7 +100,7 @@ export const ImgWrapper = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #e8e8e8;
+    background-color: ${({ theme }) => theme.colors.grey3};
 
     @media (max-width: 1100px) {
         display: none;

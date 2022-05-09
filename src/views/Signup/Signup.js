@@ -6,22 +6,24 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from 'context/AuthContext';
 
 const Signup = () => {
-    const { loginWithGoogle, createUser } = useAuth();
+    const { loginWithGoogle, createUser, currentUser } = useAuth();
+    const [error, setError] = useState();
     const { register, handleSubmit } = useForm();
     let navigate = useNavigate();
 
-    const steps = [1, 2, 3];
-
-    const handleLoginWithGoogle = async () => {
-        await loginWithGoogle().then(() => {
+    const handleLoginWithGoogle = () => {
+        loginWithGoogle().then(() => {
             navigate('/');
         });
     };
 
-    const onSubmit = async ({ email, password, displayName }) => {
-        await createUser(email, password, displayName).then(() => {
-            navigate('/');
-        });
+    const onSubmit = ({ email, password, displayName }) => {
+        createUser(email, password, displayName)
+            .then((res) => {
+                console.log(res);
+                currentUser && navigate('/');
+            })
+            .catch((err) => console.log(err.message));
     };
 
     return (
@@ -32,10 +34,12 @@ const Signup = () => {
             <FormWrapper>
                 <HeaderText>Sign up</HeaderText>
                 <Form onSubmit={handleSubmit(onSubmit)}>
-                    <Input {...register('displayName')} type="text" placeholder="Display name" autoFocus />
-                    <Input {...register('email')} type="email" placeholder="Email" />
-                    <Input {...register('password')} type="password" placeholder="Password" />
+                    <Input {...register('displayName')} type="text" placeholder="Display name" autoFocus required />
+                    <Input {...register('email')} type="email" placeholder="Email" required />
+                    <Input {...register('password')} type="password" placeholder="Password" required />
+                    {/* <p>Reset password</p> */}
                     <Button type="submit">Create account</Button>
+                    {/* {error && <p>{error}</p>} */}
                 </Form>
                 <p>or</p>
                 <Button google onClick={() => handleLoginWithGoogle()}>

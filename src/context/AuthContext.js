@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect } from 'react';
-import { auth, provider } from 'firebase.js';
-import { getAuth, signInWithPopup, createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from 'firebase/auth';
+import { provider } from 'firebase.js';
+import { getAuth, signInWithPopup, createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile, signOut } from 'firebase/auth';
 
 const AuthContext = React.createContext();
 
@@ -10,46 +10,36 @@ export function useAuth() {
 
 export function AuthProvider({ children }) {
     const [currentUser, setCurrentUser] = useState();
+
     const [loading, setLoading] = useState(true);
     const auth = getAuth();
 
-    function loginWithGoogle() {
-        return signInWithPopup(auth, provider)
-            .then((result) => {
-                setCurrentUser(result.user);
-            })
-            .catch((error) => {
-                console.log(error);
-            });
-    }
+    const loginWithGoogle = async () => {
+        return await signInWithPopup(auth, provider).then((result) => {
+            setCurrentUser(result.user);
+        });
+    };
 
-    function createUser(email, password, displayName, photoURL) {
-        return createUserWithEmailAndPassword(auth, email, password)
-            .then((result) => {
-                updateProfile(result.user, {
-                    displayName: displayName,
-                    photoURL: photoURL,
-                });
-                setCurrentUser(result.user);
-            })
-            .catch((error) => {
-                console.log(error);
+    const createUser = async (email, password, displayName, photoURL) => {
+        return await createUserWithEmailAndPassword(auth, email, password).then((result) => {
+            setCurrentUser(result.user);
+            updateProfile(result.user, {
+                displayName: displayName,
             });
-    }
+        });
+    };
 
-    function login(email, password) {
-        return signInWithEmailAndPassword(auth, email, password)
-            .then((result) => {
-                setCurrentUser(result.user);
-            })
-            .catch((error) => {
-                console.log(error);
-            });
-    }
+    const login = async (email, password) => {
+        return await signInWithEmailAndPassword(auth, email, password).then((result) => {
+            setCurrentUser(result.user);
+        });
+    };
 
-    function logout() {
-        return auth.signOut();
-    }
+    const logout = async () => {
+        return await signOut(auth).catch((err) => {
+            console.log(err.message);
+        });
+    };
 
     useEffect(() => {
         const unsubscribe = auth.onAuthStateChanged((user) => {
@@ -57,7 +47,7 @@ export function AuthProvider({ children }) {
             setLoading(false);
         });
         return unsubscribe;
-    }, []);
+    }, [auth]);
 
     const value = {
         currentUser,

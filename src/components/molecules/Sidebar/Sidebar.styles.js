@@ -7,8 +7,8 @@ import { User } from '@styled-icons/boxicons-regular/User';
 export const Wrapper = styled.div`
     height: 100%;
     width: 20%;
-    background-color: #000;
-    color: #fff;
+    background-color: ${({ theme }) => theme.colors.black};
+    color: ${({ theme }) => theme.colors.white};
     display: flex;
     flex-direction: column;
 `;
@@ -52,7 +52,7 @@ export const ArrowIcon = styled(ArrowUpOutline)`
 
 export const ProfileMenu = styled.div`
     width: 100%;
-    background-color: #1b1b1b;
+    background-color: ${({ theme }) => theme.colors.black1};
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -71,7 +71,7 @@ export const ProfileMenuItem = styled.div`
     border-radius: 10px;
     cursor: pointer;
     &:hover {
-        background-color: #242424;
+        background-color: ${({ theme }) => theme.colors.black2};
     }
 `;
 
