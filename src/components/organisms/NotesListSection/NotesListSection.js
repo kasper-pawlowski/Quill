@@ -4,11 +4,11 @@ import NotesList from 'components/molecules/NotesList/NotesList';
 import SearchBar from 'components/atoms/SearchBar/SearchBar';
 import AddNote from 'components/atoms/AddNote/AddNote';
 
-const NotesListSection = ({ setSelectedNote }) => {
+const NotesListSection = () => {
     return (
         <Wrapper>
             <SearchBar placeholder="Search Notes" />
-            <NotesList setSelectedNote={setSelectedNote} />
+            <NotesList />
             <AddNote />
         </Wrapper>
     );

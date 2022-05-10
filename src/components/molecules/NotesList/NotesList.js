@@ -4,7 +4,7 @@ import { collection, onSnapshot, query, orderBy } from 'firebase/firestore';
 import { db } from '../../../firebase';
 import NotesListNote from 'components/atoms/NotesListNote/NotesListNote';
 
-const NotesList = ({ setSelectedNote }) => {
+const NotesList = () => {
     const [notes, setNotes] = useState([]);
 
     const getNotes = () => {
@@ -26,7 +26,7 @@ const NotesList = ({ setSelectedNote }) => {
     return (
         <Wrapper>
             {notes.map((note) => (
-                <NotesListNote key={note.id} note={note} setSelectedNote={setSelectedNote} />
+                <NotesListNote key={note.id} note={note} />
             ))}
         </Wrapper>
     );

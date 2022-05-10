@@ -9,7 +9,6 @@ import NoteWrapper from 'components/organisms/NoteWrapper/NoteWrapper';
 
 const Dashboard = () => {
     const { currentUser } = useAuth();
-    const [selectedNote, setSelectedNote] = useState();
 
     if (!currentUser) {
         return <Navigate to="/welcome" replace />;
@@ -18,8 +17,8 @@ const Dashboard = () => {
     return (
         <Wrapper>
             <Sidebar />
-            <NotesListSection setSelectedNote={setSelectedNote} />
-            <NoteWrapper selectedNote={selectedNote} />
+            <NotesListSection />
+            <NoteWrapper />
         </Wrapper>
     );
 };

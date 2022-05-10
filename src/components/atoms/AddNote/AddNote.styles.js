@@ -7,19 +7,7 @@ export const Wrapper = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    position: relative;
     margin-top: auto;
-
-    &::before {
-        content: '';
-        position: absolute;
-        width: 100%;
-        height: 20px;
-        background: ${({ theme }) => theme.colors.white};
-        background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 1) 100%);
-        top: -20px;
-        left: 0;
-    }
 `;
 
 export const Button = styled.button`

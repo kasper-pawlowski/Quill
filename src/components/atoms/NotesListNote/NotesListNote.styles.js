@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const Wrapper = styled.div`
     width: 100%;
-    background-color: ${({ toggle }) => (toggle ? '#000' : '#fff')};
+    background-color: ${({ selectedNote, noteId, theme }) => (selectedNote === noteId ? theme.colors.black : theme.colors.white)};
     display: flex;
     flex-direction: column;
     padding: 20px 30px;
@@ -13,7 +13,7 @@ export const Wrapper = styled.div`
 export const Title = styled.div`
     font-size: 22px;
     font-weight: 600;
-    color: ${({ toggle }) => (toggle ? '#fff' : '#000')};
+    color: ${({ selectedNote, noteId, theme }) => (selectedNote === noteId ? theme.colors.white : theme.colors.black)};
 `;
 
 export const NoteMessage = styled.div`

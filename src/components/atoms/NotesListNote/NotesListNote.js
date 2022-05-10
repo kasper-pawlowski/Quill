@@ -1,39 +1,25 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Wrapper, Title, NoteMessage } from './NotesListNote.styles.js';
-import { deleteDoc, updateDoc, doc } from 'firebase/firestore';
-import { db } from '../../../firebase';
+import { useCtx } from 'context/Context';
 
-const NotesListNote = ({ note, setSelectedNote }) => {
-    const [toggle, setToggle] = useState(false);
+const NotesListNote = ({ note }) => {
+    const { setSelectedNote, selectedNote } = useCtx();
+    // const [isNote, setIsNote] = useState(false);
 
-    const handleUpdate = async (id) => {
-        const taskDocRef = doc(db, 'notes', id);
-        try {
-            await updateDoc(taskDocRef, {
-                title: 'Shopping list',
-                note: 'Milk, eggs, bananas, bread',
-            });
-        } catch (err) {
-            alert(err);
-        }
-    };
-
-    const handleDelete = async (id) => {
-        const taskDocRef = doc(db, 'notes', id);
-        try {
-            await deleteDoc(taskDocRef);
-        } catch (err) {
-            alert(err);
-        }
-        deleteDoc(doc(db, 'notes', id));
-    };
+    // useEffect(() => {
+    //     if (selectedNote === note.id) {
+    //         setIsNote(true);
+    //     } else {
+    //         setIsNote(false);
+    //     }
+    // }, [note.id, selectedNote]);
 
     return (
-        <Wrapper onClick={() => setSelectedNote(note.id)} toggle={toggle}>
-            <Title toggle={toggle}>{note.data.title}</Title>
+        <Wrapper onClick={() => setSelectedNote(note.id)} noteId={note.id} selectedNote={selectedNote}>
+            <Title noteId={note.id} selectedNote={selectedNote}>
+                {note.data.title}
+            </Title>
             <NoteMessage>{note.data.note}</NoteMessage>
-            {/* <button onClick={() => handleUpdate(note.id)}>update note</button> */}
-            {/* <button onClick={() => handleDelete(note.id)}>delete note</button> */}
         </Wrapper>
     );
 };
