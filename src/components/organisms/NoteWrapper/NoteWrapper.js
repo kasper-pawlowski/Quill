@@ -1,12 +1,26 @@
-import React, { useState, useEffect } from 'react';
-import { Wrapper, Title, NoteMessage, Center } from './NoteWrapper.styles.js';
+import React, { useState, useEffect, useCallback } from 'react';
+import { Wrapper, NoteTitle, NoteMessage, Center, Form, Button } from './NoteWrapper.styles.js';
 import { db } from '../../../firebase';
-import { doc, getDoc, deleteDoc, updateDoc } from 'firebase/firestore';
+import { doc, getDoc, deleteDoc, updateDoc, Timestamp } from 'firebase/firestore';
 import { useCtx } from 'context/Context';
+import { useForm } from 'react-hook-form';
 
 const NoteWrapper = () => {
     const [note, setNote] = useState([]);
     const { selectedNote, setSelectedNote } = useCtx();
+    const { register, handleSubmit, setValue, watch } = useForm();
+    const dt = new Date();
+
+    const getDate = () => {
+        const locale = navigator.languages !== undefined ? navigator.languages[0] : navigator.language;
+        const time = dt.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+        const day = dt.getDay();
+        // const month = dt.getMonth();
+        const month = dt.toLocaleDateString(locale, { month: 'short' });
+        const year = dt.getFullYear();
+        const Date = `${day} ${month} ${year}, ${time}`;
+        return Date;
+    };
 
     useEffect(() => {
         const getNote = async () => {
@@ -19,37 +33,70 @@ const NoteWrapper = () => {
             }
         };
 
+        // console.log(note);
+
         selectedNote && getNote();
     }, [selectedNote, note, setSelectedNote]);
 
-    const handleUpdate = async (selectedNote) => {
-        const taskDocRef = doc(db, 'notes', selectedNote);
-        try {
-            await updateDoc(taskDocRef, {
-                title: 'list',
-                note: 'eggs, bananas, bread',
-            });
-        } catch (err) {
-            alert(err);
-        }
-    };
+    // const handleUpdate = async ({ title, note }, selectedNote) => {
+    //     const taskDocRef = doc(db, 'notes', selectedNote);
+    //     try {
+    //         await updateDoc(taskDocRef, {
+    //             title: title,
+    //             note: note,
+    //             timestamp: Timestamp.now(),
+    //             date: getDate(),
+    //         });
+    //     } catch (err) {
+    //         console.log(err);
+    //     }
+    // };
+
+    const handleUpdate = useCallback(
+        async ({ title, note }, selectedNote) => {
+            const taskDocRef = doc(db, 'notes', selectedNote);
+            try {
+                await updateDoc(taskDocRef, {
+                    title: title,
+                    note: note,
+                    timestamp: Timestamp.now(),
+                    date: getDate(),
+                });
+            } catch (err) {
+                console.log(err);
+            }
+        },
+        [getDate]
+    );
 
     const handleDelete = async (selectedNote) => {
         const taskDocRef = doc(db, 'notes', selectedNote);
         try {
             await deleteDoc(taskDocRef);
         } catch (err) {
-            alert(err);
+            console.log(err);
         }
         deleteDoc(doc(db, 'notes', selectedNote));
     };
 
-    return selectedNote ? (
+    useEffect(() => {
+        setValue('title', note.title);
+        setValue('note', note.note);
+    }, [note.note, note.title, setValue]);
+
+    React.useEffect(() => {
+        const subscription = watch(handleSubmit(({ title, note }) => handleUpdate({ title, note }, selectedNote)));
+        return () => subscription.unsubscribe();
+    }, [handleSubmit, handleUpdate, selectedNote, watch]);
+
+    return selectedNote && note ? (
         <Wrapper>
-            <Title>{note.title}</Title>
-            <NoteMessage>{note.note}</NoteMessage>
-            <button onClick={() => handleUpdate(selectedNote)}>update note</button>
-            <button onClick={() => handleDelete(selectedNote)}>delete note</button>
+            <Form>
+                <NoteTitle {...register('title')} maxLength="50" />
+                <NoteMessage {...register('note')} maxLength="50" />
+                {note.date && <p>Last updated: {note.date}</p>}
+                <button onClick={() => handleDelete(selectedNote)}>delete note</button>
+            </Form>
         </Wrapper>
     ) : (
         <Center>

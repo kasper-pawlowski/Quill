@@ -16,10 +16,12 @@ const NotesListNote = ({ note }) => {
 
     return (
         <Wrapper onClick={() => setSelectedNote(note.id)} noteId={note.id} selectedNote={selectedNote}>
-            <Title noteId={note.id} selectedNote={selectedNote}>
-                {note.data.title}
-            </Title>
-            <NoteMessage>{note.data.note}</NoteMessage>
+            {note.data.title && (
+                <Title noteId={note.id} selectedNote={selectedNote}>
+                    {note.data.title}
+                </Title>
+            )}
+            {note.data.note && <NoteMessage>{note.data.note}</NoteMessage>}
         </Wrapper>
     );
 };

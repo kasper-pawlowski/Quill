@@ -37,8 +37,8 @@ const Login = () => {
             <FormWrapper>
                 <HeaderText>{visitedBefore ? 'Welcome back 👋' : 'Log in'}</HeaderText>
                 <Form onSubmit={handleSubmit(onSubmit)}>
-                    <Input {...register('email')} type="email" placeholder="Email" autoFocus />
-                    <Input {...register('password')} type="password" placeholder="Password" />
+                    <Input {...register('email')} type="email" placeholder="Email" required />
+                    <Input {...register('password')} type="password" placeholder="Password" required />
                     <Button type="submit">Log in</Button>
                 </Form>
                 <p>or</p>

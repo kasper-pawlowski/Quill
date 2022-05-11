@@ -8,7 +8,7 @@ const NotesList = () => {
     const [notes, setNotes] = useState([]);
 
     const getNotes = () => {
-        const q = query(collection(db, 'notes'), orderBy('created', 'desc'));
+        const q = query(collection(db, 'notes'), orderBy('timestamp', 'desc'));
         onSnapshot(q, (querySnapshot) => {
             setNotes(
                 querySnapshot.docs.map((doc) => ({

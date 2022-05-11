@@ -12,7 +12,7 @@ export const GlobalStyle = createGlobalStyle`
     font-family: 'Poppins', sans-serif;
   }
   
-  a, button, input {
+  a, button, input, textarea {
     color: inherit;
     text-decoration: none;
     font-family: 'Poppins', sans-serif;

@@ -34,7 +34,7 @@ const Signup = () => {
             <FormWrapper>
                 <HeaderText>Sign up</HeaderText>
                 <Form onSubmit={handleSubmit(onSubmit)}>
-                    <Input {...register('displayName')} type="text" placeholder="Display name" autoFocus required />
+                    <Input {...register('displayName')} type="text" placeholder="Display name" required />
                     <Input {...register('email')} type="email" placeholder="Email" required />
                     <Input {...register('password')} type="password" placeholder="Password" required />
                     {/* <p>Reset password</p> */}

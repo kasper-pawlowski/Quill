@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import TextareaAutosize from 'react-textarea-autosize';
 
 export const Wrapper = styled.div`
     flex: 1;
@@ -6,14 +7,36 @@ export const Wrapper = styled.div`
     padding: 30px;
 `;
 
-export const Title = styled.p`
-    font-size: 24px;
-    font-weight: 600;
+export const Form = styled.form`
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 `;
 
-export const NoteMessage = styled.p`
+export const NoteTitle = styled(TextareaAutosize)`
+    font-size: 36px;
+    font-weight: 600;
+    resize: none;
+    border: none;
+    outline: none;
+    height: fit-content;
+`;
+
+export const NoteMessage = styled(TextareaAutosize)`
     font-size: 18px;
     font-weight: 500;
+    resize: none;
+    border: none;
+    outline: none;
+`;
+
+export const Button = styled.button`
+    padding: 15px 20px;
+    font-size: 18px;
+    background-color: ${({ theme }) => theme.colors.black};
+    color: ${({ theme }) => theme.colors.white};
+    border-radius: 10px;
 `;
 
 export const Center = styled.div`

@@ -10,13 +10,17 @@ export const Wrapper = styled.div`
     cursor: pointer;
 `;
 
-export const Title = styled.div`
+export const Title = styled.p`
+    white-space: nowrap;
+    overflow: hidden;
     font-size: 22px;
     font-weight: 600;
     color: ${({ selectedNote, noteId, theme }) => (selectedNote === noteId ? theme.colors.white : theme.colors.black)};
 `;
 
-export const NoteMessage = styled.div`
+export const NoteMessage = styled.p`
+    white-space: nowrap;
+    overflow: hidden;
     font-size: 16px;
     color: ${({ theme }) => theme.colors.grey2};
 `;

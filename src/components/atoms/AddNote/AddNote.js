@@ -11,7 +11,7 @@ const AddNote = () => {
             await addDoc(notesRef, {
                 title: 'Shopping list',
                 note: 'Milk, eggs, bananas, bread',
-                created: Timestamp.now(),
+                timestamp: Timestamp.now(),
             });
         } catch (err) {
             alert(err);
