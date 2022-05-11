@@ -3,6 +3,7 @@ import { Wrapper } from './NotesList.styles.js';
 import { collection, onSnapshot, query, orderBy } from 'firebase/firestore';
 import { db } from '../../../firebase';
 import NotesListNote from 'components/atoms/NotesListNote/NotesListNote';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const NotesList = () => {
     const [notes, setNotes] = useState([]);
@@ -24,10 +25,12 @@ const NotesList = () => {
     }, []);
 
     return (
-        <Wrapper>
-            {notes.map((note) => (
-                <NotesListNote key={note.id} note={note} />
-            ))}
+        <Wrapper as={motion.div} layout>
+            <AnimatePresence>
+                {notes.map((note) => (
+                    <NotesListNote key={note.id} note={note} as={motion.div} layout tranisiton={{ duration: 0.15 }} />
+                ))}
+            </AnimatePresence>
         </Wrapper>
     );
 };

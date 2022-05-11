@@ -1,23 +1,24 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Wrapper, Title, NoteMessage } from './NotesListNote.styles.js';
 import { useCtx } from 'context/Context';
+import { motion } from 'framer-motion';
 
 const NotesListNote = ({ note }) => {
     const { setSelectedNote, selectedNote } = useCtx();
-    // const [isNote, setIsNote] = useState(false);
-
-    // useEffect(() => {
-    //     if (selectedNote === note.id) {
-    //         setIsNote(true);
-    //     } else {
-    //         setIsNote(false);
-    //     }
-    // }, [note.id, selectedNote]);
 
     return (
-        <Wrapper onClick={() => setSelectedNote(note.id)} noteId={note.id} selectedNote={selectedNote}>
+        <Wrapper
+            onClick={() => setSelectedNote(note.id)}
+            noteid={note.id}
+            selectednote={selectedNote}
+            as={motion.div}
+            layout
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.15 }}>
             {note.data.title && (
-                <Title noteId={note.id} selectedNote={selectedNote}>
+                <Title noteid={note.id} selectednote={selectedNote}>
                     {note.data.title}
                 </Title>
             )}

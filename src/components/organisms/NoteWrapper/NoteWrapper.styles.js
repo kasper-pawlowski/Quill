@@ -2,6 +2,9 @@ import styled from 'styled-components';
 import TextareaAutosize from 'react-textarea-autosize';
 
 export const Wrapper = styled.div`
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
     flex: 1;
     height: 100%;
     padding: 30px;
@@ -14,8 +17,13 @@ export const Form = styled.form`
     gap: 20px;
 `;
 
+export const Toolbar = styled.div`
+    display: flex;
+    gap: 30px;
+`;
+
 export const NoteTitle = styled(TextareaAutosize)`
-    font-size: 36px;
+    font-size: 30px;
     font-weight: 600;
     resize: none;
     border: none;
@@ -29,6 +37,7 @@ export const NoteMessage = styled(TextareaAutosize)`
     resize: none;
     border: none;
     outline: none;
+    color: ${({ theme }) => theme.colors.grey1};
 `;
 
 export const Button = styled.button`

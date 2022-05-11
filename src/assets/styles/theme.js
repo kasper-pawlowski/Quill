@@ -7,6 +7,7 @@ export const theme = {
         grey1: '#4f4f4f',
         grey2: '#9e9e9e',
         grey3: '#e8e8e8',
+        grey4: '#ececec91',
     },
     fontSize: {
         xxl: '34px',
